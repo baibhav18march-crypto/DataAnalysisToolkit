@@ -1,49 +1,32 @@
 package com.toolkit.dataanalysis;
 
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Fixed input: project.csv, column: marks
-        String file = "project2.csv";
-        String column = "marks";
+        // Fixed input: project.csv
+        String file = "project.csv";
 
         try {
-            // Dataset reads your CSV and parses columns as double[]
-            Dataset dataset = new Dataset(file) {};
+            // Dataset reads your file and gets data as List<Double>
+            Dataset dataset = new Dataset(new File(file));
+            List<Double> data = dataset.getData();
 
             // Use your strategies
-            double[] data = dataset.getColumn(column);
             double sum = new SumStrategy().execute(data);
             double mean = new AverageStrategy().execute(data);
             double variance = new VarianceStrategy().execute(data);
 
-            // Console output
-            System.out.println("File: " + file);
-            System.out.println("Column: " + column);
-            System.out.println("Sum = " + sum);
-            System.out.println("Mean = " + mean);
-            System.out.println("Variance = " + variance);
+            // Print results
+            System.out.println("Sum: " + sum);
+            System.out.println("Mean: " + mean);
+            System.out.println("Variance: " + variance);
 
-            // CSV output
-            writeCsv("analysis.csv",
-                    "file,column,sum,mean,variance",
-                    file + "," + column + "," + sum + "," + mean + "," + variance);
-
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
-
-    private static void writeCsv(String fileName, String header, String row) {
-        try (FileWriter fw = new FileWriter(fileName)) {
-            fw.write(header);
-            fw.write(System.lineSeparator());
-            fw.write(row);
         } catch (IOException e) {
-            System.err.println("Could not write to " + fileName + ": " + e.getMessage());
+            System.err.println("Error reading file: " + e.getMessage());
         }
     }
 }
