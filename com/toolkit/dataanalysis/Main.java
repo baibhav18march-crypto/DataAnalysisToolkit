@@ -7,8 +7,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        // Fixed input: project.csv
-        String file = "project.csv";
+        // Fixed input: project2.csv
+        String file = "project2.csv";
 
         try {
             // Dataset reads your file and gets data as List<Double>
