@@ -2,6 +2,7 @@ package com.toolkit.dataanalysis;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
@@ -11,12 +12,9 @@ public class Main {
         String column = "marks";
 
         try {
-            // Dataset reads your CSV and parses columns as double[]
-            Dataset dataset = new Dataset(file) {};
-
-            // Use your strategies
-            double[] data = dataset.getColumn(column);
-            int count = data.length;  // number of input records
+            // Dataset reads your CSV and parses columns as List<Double>            Dataset dataset = new Dataset(file) {};
+Dataset dataset = new Dataset(file);            // Use your strategies
+List<Double> data = dataset.getColumn(column);            int count = data.size();  // number of input records
 
             double sum = new SumStrategy().execute(data);
             double mean = new AverageStrategy().execute(data);
