@@ -34,18 +34,19 @@ com/toolkit/dataanalysis/
 When running with a sample dataset:
 
 ```
-Sum: 150.5
-Mean: 25.083333333333332
-Variance: 45.24305555555556
-```
+File: project2.csv
+Column: marks
+Number of records = 6
+Sum = 150.5
+Mean = 25.083333333333332
+Variance = 45.24305555555556```
 
 ## Code Example
 
 ```java
 // Load data from CSV file
 Dataset dataset = new Dataset(new File("project2.csv"));
-List<Double> data = dataset.getData();
-
+double[] data = dataset.getColumn("marks");
 // Calculate statistics
 double sum = new SumStrategy().execute(data);
 double mean = new AverageStrategy().execute(data);
